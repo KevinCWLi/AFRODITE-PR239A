@@ -54,10 +54,19 @@ using namespace std;
 
 EventAction::EventAction()
  : G4UserEventAction(),
-   fEnergyAbs(0.),
-   fEnergyGap(0.),
-   fTrackLAbs(0.),
-   fTrackLGap(0.)
+   fEnergyAbs(0.0),
+   fEnergyGap(0.0),
+   fTrackLAbs(0.0),
+   fTrackLGap(0.0),
+   // Added the following constructor declarations to fix compile errors
+   GainTIARA(1.0),
+   OffsetTIARA(0.0),
+   GainCLOVER(1.0),
+   OffsetCLOVER(0.0),
+   GainPlasticScint(1.0),
+   OffsetPlasticScint(0.0),
+   GainLEPS(1.0),
+   OffsetLEPS(0.0)
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
