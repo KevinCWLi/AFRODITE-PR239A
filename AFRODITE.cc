@@ -23,10 +23,8 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-// $Id: exampleB4a.cc 75215 2013-10-29 16:07:06Z gcosmo $
-//
-/// \file exampleB4a.cc
-/// \brief Main program of the B4a example
+/// \file AFRODITE.cc
+/// \brief Main program of the AFRODITE code (PR239A branch)
 
 #include "DetectorConstruction.hh"
 #include "ActionInitialization.hh"
@@ -61,7 +59,7 @@
 namespace {
     void PrintUsage() {
         G4cerr << " Usage: " << G4endl;
-        G4cerr << " exampleB4a [-m macro ] [-u UIsession] [-t nThreads]" << G4endl;
+        G4cerr << " AFRODITE [-m macro ] [-u UIsession] [-t nThreads]" << G4endl;
         G4cerr << "   note: -t option is available only for multi-threaded mode."
         << G4endl;
     }
@@ -96,8 +94,6 @@ int main(int argc,char** argv)
             return 1;
         }
     }
-    
-
     
     // Choose the Random engine
     //
