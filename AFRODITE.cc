@@ -23,8 +23,18 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-/// \file AFRODITE.cc
-/// \brief Main program of the AFRODITE code (PR239A branch)
+//      ----------------------------------------------------------------
+//                          AFRODITE (iThemba Labs)
+//      ----------------------------------------------------------------
+//
+//      Github repository: https://www.github.com/KevinCWLi/AFRODITE
+//
+//      Main Author:    K.C.W. Li
+//
+//      email: likevincw@gmail.com
+//
+//      Main program of the AFRODITE code (PR239A branch)
+//
 
 #include "DetectorConstruction.hh"
 #include "ActionInitialization.hh"
