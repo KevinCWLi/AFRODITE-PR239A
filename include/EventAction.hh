@@ -134,8 +134,11 @@ class EventAction : public G4UserEventAction
     
     /////////////////////
     //      TIARA
-    G4double GainTIARA = 1.0;
-    G4double OffsetTIARA = 0.0;
+    G4double GainTIARA;
+    G4double OffsetTIARA;
+    // Previous versions, moved declaration to EventAction.cc constructor
+    //G4double GainTIARA = 1.0;
+    //G4double OffsetTIARA = 0.0;
     
     G4double    TIARA_AA[5][16][8][3][TIARA_TotalTimeSamples];
     //  First index designates the TIARANo
@@ -157,8 +160,11 @@ class EventAction : public G4UserEventAction
     
     ////////////////////////
     //      CLOVERS
-    G4double GainCLOVER = 1.0;
-    G4double OffsetCLOVER = 0.0;
+    G4double GainCLOVER;
+    G4double OffsetCLOVER;
+    // Previous versions, moved declaration to EventAction.cc constructor
+    //G4double GainCLOVER = 1.0;
+    //G4double OffsetCLOVER = 0.0;
     
     G4double    CLOVER_HPGeCrystal_EDep[9][4][CLOVER_TotalTimeSamples];
     G4bool      CLOVER_HPGeCrystal_EDepVETO[9][4][CLOVER_TotalTimeSamples];
@@ -176,8 +182,11 @@ class EventAction : public G4UserEventAction
     
     /////////////////////////////////////////
     //      PlasticScint DETECTORS
-    G4double    GainPlasticScint = 1.0;
-    G4double    OffsetPlasticScint = 0.0;
+    G4double    GainPlasticScint;
+    G4double    OffsetPlasticScint;
+    // Previous versions, moved declaration to EventAction.cc constructor
+    //G4double    GainPlasticScint = 1.0;
+    //G4double    OffsetPlasticScint = 0.0;
     
     G4double    PlasticScint_EDep[3][PlasticScint_TotalTimeSamples];
     G4double    PlasticScint_TOF[3][PlasticScint_TotalTimeSamples];
@@ -200,8 +209,11 @@ class EventAction : public G4UserEventAction
     
     ////////////////////////
     //      LEPS
-    G4double GainLEPS = 1.0;
-    G4double OffsetLEPS = 0.0;
+    G4double GainLEPS;
+    G4double OffsetLEPS;
+    // Previous versions, moved declaration to EventAction.cc constructor
+    //G4double GainLEPS = 1.0;
+    //G4double OffsetLEPS = 0.0;
     
     G4double    LEPS_HPGeCrystal_EDep[6][4][LEPS_TotalTimeSamples];
     G4double    LEPS_EDep[6][LEPS_TotalTimeSamples];
