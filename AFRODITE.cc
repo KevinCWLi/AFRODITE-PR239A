@@ -135,9 +135,9 @@ int main(int argc,char** argv)
     runManager->SetUserInitialization(detConstruction);
     
     /*
-    G4VModularPhysicsList* physicsList = new QGSP_BERT;
-    runManager->SetUserInitialization(physicsList);
-    */
+     G4VModularPhysicsList* physicsList = new QGSP_BERT;
+     runManager->SetUserInitialization(physicsList);
+     */
     
     ////////////////////////////////////////////////////////////////////
     //      Initialising the Physics List with Radioactive Decay

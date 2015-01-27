@@ -3,7 +3,7 @@
 # GNUmakefile for examples module.  Gabriele Cosmo, 06/04/98.
 # --------------------------------------------------------------
 
-name := AFRODITE
+name := exampleB4a
 G4TARGET := $(name)
 G4EXLIB := true
 
