@@ -52,8 +52,7 @@ set(AFRODITE_SCRIPTS
   gui.mac
   run.png
   init_vis.mac
-  run1.mac
-  run2.mac
+  pr239a.mac
   vis.mac
   )
 
