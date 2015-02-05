@@ -67,17 +67,17 @@ fParticleGun(0)
     //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("He3");
     //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("neutron");
     //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("mu-");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("gamma");
+    G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("gamma");
     //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("e-");
     //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("alpha");
     //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("proton");
-    G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("geantino");
+    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("geantino");
     
-    //fParticleGun->SetParticleDefinition(particleDefinition);
+    fParticleGun->SetParticleDefinition(particleDefinition);
     
-    fParticleGun->SetParticleEnergy(1.*MeV);
+    //fParticleGun->SetParticleEnergy(1.*MeV);
     //fParticleGun->SetParticleEnergy(1.332*MeV);
-    //fParticleGun->SetParticleEnergy(7.0*MeV);
+    fParticleGun->SetParticleEnergy(7.0*MeV);
     
     //fParticleGun->SetParticleEnergy(200.*MeV);
     //fParticleGun->SetParticleEnergy(22.5*MeV);
@@ -146,7 +146,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
      //ion->SetPDGLifeTime(1*ns);
      fParticleGun->SetParticleDefinition(ion);
      fParticleGun->SetParticleCharge(ionCharge);
-     */
+    */
     
     /*
      ////////    4He, +1 charge
@@ -188,20 +188,22 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     ////    ISOTROPIC
     //      Exploiting the spherical symmetry of normal distributions
     //      Gaussian Distribution
-    /*
-     mx = G4RandGauss::shoot( 0, 1.);
-     my = G4RandGauss::shoot( 0, 1.);
-     mz = G4RandGauss::shoot( 0, 1.);
+    
+    mx = G4RandGauss::shoot( 0, 1.);
+    my = G4RandGauss::shoot( 0, 1.);
+    mz = G4RandGauss::shoot( 0, 1.);
      
-     if(mz<0) mz = -mz;
-     //mz = abs(mz);
-     //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,-1.));
-     //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, 10.));
-     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, -mz));
-     */
+    //if(mz<0) mz = -mz;
+    //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, -mz));
+
+    //mz = abs(mz);
+    //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,-1.));
+    //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, 10.));
     
+    fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, mz));
+
     ////    Alternative Method for ISOTROPY
-    
+    /*
     G4double theta = 2*M_PI*G4UniformRand();
     //G4double mz = -1.0 + 2*G4UniformRand();
     G4double mz = -1.0 + G4UniformRand();
@@ -212,7 +214,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     my = a*sin(theta);
     
     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, mz));
-    
+    */
     
     
     /*

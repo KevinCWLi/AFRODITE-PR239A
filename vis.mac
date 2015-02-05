@@ -5,7 +5,7 @@
 # Use these open statements to open selected visualization
 #
 # Use this open statement to create an OpenGL view:
-/vis/open OGL 600x600-0+0
+#/vis/open OGL 600x600-0+0
 #
 # Use this open statement to create an OpenInventor view:
 #/vis/open OIX
@@ -43,6 +43,9 @@
 #
 # Draw coordinate axes:
 #/vis/scene/add/axes 0 0 0 1 m
+#
+# Print Progress
+/run/printProgress 10000
 #
 # Draw smooth trajectories at end of event, showing trajectory points
 # as markers 2 pixels wide:

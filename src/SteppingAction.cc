@@ -199,6 +199,9 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
         edepCLOVER_HPGeCrystal = aStep->GetTotalEnergyDeposit()/keV;
         
         fEventAction->AddEnergyCLOVER_HPGeCrystal(CLOVERNo, CLOVER_HPGeCrystalNo, iTS, edepCLOVER_HPGeCrystal);
+        
+        //G4cout << "Here we are in the Stepping Action    " << G4endl;
+
     }
     
     

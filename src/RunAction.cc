@@ -66,6 +66,19 @@ RunAction::RunAction()
     //
     
     // Creating 1D histograms
+    
+    ////    CLOVER DETECTORS, Histograms 10-19
+    analysisManager->CreateH1("CvsE_CLOVER1","CLOVER 1 - Counts versus Energy", 10000, 0., 10000.);
+    analysisManager->CreateH1("CvsE_CLOVER2","CLOVER 2 - Counts versus Energy", 10000, 0., 10000.);
+    analysisManager->CreateH1("CvsE_CLOVER3","CLOVER 3 - Counts versus Energy", 10000, 0., 10000.);
+    analysisManager->CreateH1("CvsE_CLOVER4","CLOVER 4 - Counts versus Energy", 10000, 0., 10000.);
+    analysisManager->CreateH1("CvsE_CLOVER5","CLOVER 5 - Counts versus Energy", 10000, 0., 10000.);
+    analysisManager->CreateH1("CvsE_CLOVER6","CLOVER 6 - Counts versus Energy", 10000, 0., 10000.);
+    analysisManager->CreateH1("CvsE_CLOVER7","CLOVER 7 - Counts versus Energy", 10000, 0., 10000.);
+    analysisManager->CreateH1("CvsE_CLOVER8","CLOVER 8 - Counts versus Energy", 10000, 0., 10000.);
+    analysisManager->CreateH1("CvsE_CLOVER9","CLOVER 9 - Counts versus Energy", 10000, 0., 10000.);
+    analysisManager->CreateH1("CvsE_CLOVER_EA","Entire CLOVER Array - Counts versus Energy", 10000, 0., 10000.);
+
     /*
      ////    TIARA DETECTORS, Histograms 1-6
      analysisManager->CreateH1("CvsE_TIARA1","TIARA 1 - Counts versus Energy", 10000, 0., 10000.);
@@ -80,16 +93,6 @@ RunAction::RunAction()
      analysisManager->CreateH1("CvsE_PADDLE2","PADDLE 2 - Counts versus Energy", 1000, 0., 100.);
      analysisManager->CreateH1("CvsE_PADDLE3","PADDLE 3 - Counts versus Energy", 1000, 0., 100.);
      
-     ////    CLOVER DETECTORS, Histograms 10-19
-     analysisManager->CreateH1("CvsE_CLOVER1","CLOVER 1 - Counts versus Energy", 3000, 0., 3000.);
-     analysisManager->CreateH1("CvsE_CLOVER2","CLOVER 2 - Counts versus Energy", 3000, 0., 3000.);
-     analysisManager->CreateH1("CvsE_CLOVER3","CLOVER 3 - Counts versus Energy", 3000, 0., 3000.);
-     analysisManager->CreateH1("CvsE_CLOVER4","CLOVER 4 - Counts versus Energy", 3000, 0., 3000.);
-     analysisManager->CreateH1("CvsE_CLOVER5","CLOVER 5 - Counts versus Energy", 3000, 0., 3000.);
-     analysisManager->CreateH1("CvsE_CLOVER6","CLOVER 6 - Counts versus Energy", 3000, 0., 3000.);
-     analysisManager->CreateH1("CvsE_CLOVER7","CLOVER 7 - Counts versus Energy", 3000, 0., 3000.);
-     analysisManager->CreateH1("CvsE_CLOVER8","CLOVER 8 - Counts versus Energy", 3000, 0., 3000.);
-     analysisManager->CreateH1("CvsE_CLOVER9","CLOVER 9 - Counts versus Energy", 3000, 0., 3000.);
      analysisManager->CreateH1("CvsE_CLOVER_EA","Entire CLOVER Array - Counts versus Energy", 3000, 0., 3000.);
      */
     

@@ -73,7 +73,7 @@ const G4double      PlasticScint_TotalSampledTime = PlasticScint_SamplingTime * 
 
 
 ///////////////     CLOVER Detectors - PIXIE16 Sampling     ///////////////////
-const G4bool        Activate_CLOVER_ADDBACK = false;
+const G4bool        Activate_CLOVER_ADDBACK = true;
 const G4bool        Activate_CLOVER_ComptonSupression = false;
 
 const G4double      CLOVER_SamplingTime = 10; // ns
