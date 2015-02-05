@@ -30,19 +30,21 @@
 //      Github repository: https://www.github.com/KevinCWLi/AFRODITE
 //
 //      Main Author:    K.C.W. Li
+//      Edits: Steve Peterson & Vijitha Ramanathan
 //
 //      email: likevincw@gmail.com
 //
 
 #include "PrimaryGeneratorAction.hh"
+#include "PrimaryGeneratorMessenger.hh"
 
 #include "G4RunManager.hh"
 #include "G4LogicalVolumeStore.hh"
 #include "G4LogicalVolume.hh"
 #include "G4Box.hh"
 #include "G4Event.hh"
-#include "G4ParticleGun.hh"
 
+#include "G4ParticleGun.hh"
 #include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
 #include "G4SystemOfUnits.hh"
@@ -54,50 +56,49 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 PrimaryGeneratorAction::PrimaryGeneratorAction()
-: G4VUserPrimaryGeneratorAction(),
-fParticleGun(0)
+  : G4VUserPrimaryGeneratorAction()
 {
-    ///////////////////////////////////////////////////////////////
-    //          To generate radioactive decay - enabled particles
-    ///////////////////////////////////////////////////////////////
-    
-    G4int n_particle = 1;
-    fParticleGun  = new G4ParticleGun(n_particle);
-    
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("He3");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("neutron");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("mu-");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("gamma");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("e-");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("alpha");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("proton");
-    G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("geantino");
-    
-    //fParticleGun->SetParticleDefinition(particleDefinition);
-    
-    fParticleGun->SetParticleEnergy(1.*MeV);
-    //fParticleGun->SetParticleEnergy(1.332*MeV);
-    //fParticleGun->SetParticleEnergy(7.0*MeV);
-    
-    //fParticleGun->SetParticleEnergy(200.*MeV);
-    //fParticleGun->SetParticleEnergy(22.5*MeV);
-    //fParticleGun->SetParticleEnergy(50.0*MeV);
-    //fParticleGun->SetParticleEnergy(4*GeV);
-    //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,-1.));
-    
-    
-    //fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.*m,1.90*m));
-    //fParticleGun->SetParticlePosition(G4ThreeVector(0.,57.5*mm,1.6*m));
-    //fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.));
-    //fParticleGun->SetParticlePosition(G4ThreeVector(0.,57.5*mm,2.10*m));
-    
-    fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.));
-    //fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,-3.*mm));
-    //fParticleGun->SetParticlePosition(G4ThreeVector(2000.*mm,0.,3000.0*mm));
-    
-    //fParticleGun->SetParticlePosition(G4ThreeVector(-3.*m, 0., -3.8*m));
-    
-    
+  // Set default particle attributes
+  G4int n_particle = 1;
+  fParticleGun = new G4ParticleGun(n_particle);
+  SetDefaultKinematics();
+
+  // Create a messenger for this class
+  gunMessenger = new PrimaryGeneratorMessenger(this);
+
+  // Set verbosityLevel
+  verbosityLevel = 0;
+
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+PrimaryGeneratorAction::~PrimaryGeneratorAction()
+{
+  delete fParticleGun;
+  delete gunMessenger;
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void PrimaryGeneratorAction::SetDefaultKinematics()
+{
+
+  // Define primary particles: protons, He3, neutron, mu-, gamma, e-, alpha, geantino
+  particle_type = "proton";
+
+  // Define the parameters for the energy of primary particles
+  G4double default_mean_particle_energy = 250.0*MeV;
+  mean_particle_energy = default_mean_particle_energy;
+
+  // Define the parameters of the initial position (using previous default, for now)
+  G4ThreeVector default_particle_position = G4ThreeVector(0.0*mm, 0.0*mm, 0.0*mm);
+  starting_particle_position = default_particle_position;
+
+  // Define the parameters of the momentum of primary particles: 
+  G4ThreeVector default_particle_momentum_direction = G4ThreeVector(1.0, 0.0, 0.0);
+  starting_particle_momentum_direction = default_particle_momentum_direction;
+
     /*
      ////////    4He, +1 charge
      G4int Z = 2, A = 4;
@@ -111,13 +112,16 @@ fParticleGun(0)
      fParticleGun->SetParticleDefinition(ion);
      fParticleGun->SetParticleCharge(ionCharge);
      */
-}
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+  // Set basic default values
+  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+  G4String particleName;
+  G4ParticleDefinition* particle = particleTable->FindParticle(particle_type);
+  fParticleGun->SetParticleDefinition(particle);
+  fParticleGun->SetParticleEnergy(mean_particle_energy);
+  fParticleGun->SetParticlePosition(starting_particle_position);
+  fParticleGun->SetParticleMomentumDirection(starting_particle_momentum_direction);
 
-PrimaryGeneratorAction::~PrimaryGeneratorAction()
-{
-    delete fParticleGun;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -125,6 +129,12 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
     
+    // Set the starting primary particles
+    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+    G4ParticleDefinition* particle = particleTable->FindParticle(particle_type);
+    particle_definition = particle;
+    fParticleGun->SetParticleDefinition(particle); 
+
     
     ///////////////////////////////////////////////////////////////
     //          To generate radioactive decay - enabled particles
@@ -211,7 +221,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     mx = a*cos(theta);
     my = a*sin(theta);
     
-    fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, mz));
+    //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, mz));
     
     
     
@@ -320,7 +330,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
      */
     
     
-    fParticleGun->GeneratePrimaryVertex(anEvent);
+    //fParticleGun->GeneratePrimaryVertex(anEvent);
     
     //G4double Lifetime = fParticleGun->GetParticleDefinition()->GetPDGLifeTime();
     //G4double Lifetime = recoil->GetPDGLifeTime();
@@ -346,9 +356,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
      fParticleGun->GeneratePrimaryVertex(anEvent);
      }
      */
-    
-    
-    
+
     
     ///////////////////////////////////////////////////
     //       Initial Energy Distribution of Particle
@@ -363,13 +371,41 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
      */
     
     
-    
-    
-    
+    particle_energy = mean_particle_energy;
+    particle_position = starting_particle_position;
+    particle_momentum_direction = G4ThreeVector(mx, my, mz);
+
+
+    // Set final beam energy
+    fParticleGun->SetParticleEnergy(particle_energy);
+
+    // Set final particle position
+    fParticleGun->SetParticlePosition(particle_position);
+
+    // Set final particle momentum direction
+    fParticleGun->SetParticleMomentumDirection(particle_momentum_direction);
+
+    // Generate a primary particle
+    fParticleGun->GeneratePrimaryVertex(anEvent);
     
     ////////////////////////////////////////////////////////
     //          PARTICLE INFORMATION OUTPUT
     ////////////////////////////////////////////////////////
+
+    // Print out starting particle details
+    if (verbosityLevel > 0) {
+      if (anEvent->GetEventID() == 0 || verbosityLevel > 1) {
+	G4cout << G4endl;
+        G4cout << "----- Primary Generator Source Details for Event: " << anEvent->GetEventID()
+	       << " -----" << G4endl;
+        G4cout << "  Particle name: " << particle_definition->GetParticleName() << G4endl;
+        G4cout << "         Energy: " << particle_energy/MeV << " MeV" << G4endl;
+        G4cout << "       Position: " << particle_position/mm << " mm" << G4endl;
+        G4cout << "      Direction: " << particle_momentum_direction/mrad << " mrad" << G4endl;
+	G4cout << G4endl;
+      }
+    }
+
     /*
      G4double Lifetime = fParticleGun->GetParticleDefinition()->GetPDGLifeTime();
      G4double Spin = fParticleGun->GetParticleDefinition()->GetPDGSpin();
@@ -426,6 +462,11 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
      fParticleGun->GeneratePrimaryVertex(anEvent);
      */
 }
+
+// ********************************************************************
+void PrimaryGeneratorAction::SetStartingParticleType (G4String str)
+{ particle_type = str; }
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
