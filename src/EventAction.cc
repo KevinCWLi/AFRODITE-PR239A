@@ -342,7 +342,14 @@ void EventAction::EndOfEventAction(const G4Event* event)
             }
             
             //      For each Clover
-            if(CLOVER_EDep[i][k]!=0) analysisManager->FillH1(i, CLOVER_EDep[i][k]);
+            if(CLOVER_EDep[i][k]!=0)
+            {
+                ////    Filling histograms for individual CLOVER detectors
+                analysisManager->FillH1(i, CLOVER_EDep[i][k]);
+                
+                ////    Filling the histogram for the Entire AFRODITE array
+                analysisManager->FillH1(9, CLOVER_EDep[i][k]);
+            }
             
             if(Activate_CLOVER_ADDBACK && CLOVER_EDep[i][k] >= CLOVER_HPGeCrystal_ThresholdEnergy)
             {

@@ -77,7 +77,7 @@ fParticleGun(0)
     
     //fParticleGun->SetParticleEnergy(1.*MeV);
     //fParticleGun->SetParticleEnergy(1.332*MeV);
-    fParticleGun->SetParticleEnergy(7.0*MeV);
+    fParticleGun->SetParticleEnergy(4.0*MeV);
     
     //fParticleGun->SetParticleEnergy(200.*MeV);
     //fParticleGun->SetParticleEnergy(22.5*MeV);
@@ -201,7 +201,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, 10.));
     
     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, mz));
-
+    
+    
     ////    Alternative Method for ISOTROPY
     /*
     G4double theta = 2*M_PI*G4UniformRand();
