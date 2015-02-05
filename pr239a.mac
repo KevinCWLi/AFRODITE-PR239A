@@ -1,0 +1,29 @@
+# Macro file for AFRODITE - PR239A
+# 
+# To be run preferably in batch, without graphics:
+# ./AFRODITE -m pr239a.mac
+#
+# Verbosity Levels
+#
+/control/verbose 2
+/run/verbose 2
+/tracking/verbose 0
+/afrodite/gun/verbose 1
+#
+# Multi-threading
+#
+#/run/numberOfWorkers 4
+#
+# Run Initialization
+#
+/run/initialize
+#
+# Beam Details
+#
+# Default kinematics: 250 MeV protons in direction (1.0,0.0,0.0)
+#
+# Execute Particles
+#
+/run/printProgress 100
+/run/beamOn 1000
+

@@ -30,6 +30,7 @@
 //      Github repository: https://www.github.com/KevinCWLi/AFRODITE
 //
 //      Main Author:    K.C.W. Li
+//      Edits: Steve Peterson & Vijitha Ramanathan
 //
 //      email: likevincw@gmail.com
 //
@@ -79,22 +80,6 @@ RunAction::RunAction()
     analysisManager->CreateH1("CvsE_CLOVER9","CLOVER 9 - Counts versus Energy", 10000, 0., 10000.);
     analysisManager->CreateH1("CvsE_CLOVER_EA","Entire CLOVER Array - Counts versus Energy", 10000, 0., 10000.);
 
-    /*
-     ////    TIARA DETECTORS, Histograms 1-6
-     analysisManager->CreateH1("CvsE_TIARA1","TIARA 1 - Counts versus Energy", 10000, 0., 10000.);
-     analysisManager->CreateH1("CvsE_TIARA2","TIARA 2 - Counts versus Energy", 10000, 0., 10000.);
-     analysisManager->CreateH1("CvsE_TIARA3","TIARA 3 - Counts versus Energy", 10000, 0., 10000.);
-     analysisManager->CreateH1("CvsE_TIARA4","TIARA 4 - Counts versus Energy", 10000, 0., 10000.);
-     analysisManager->CreateH1("CvsE_TIARA5","TIARA 5 - Counts versus Energy", 10000, 0., 10000.);
-     analysisManager->CreateH1("CvsE_TIARA_EA","Entire TIARA Array - Counts versus Energy", 10000, 0., 10000.);
-     
-     ////    PADDLE DETECTORS, Histograms 7-9
-     analysisManager->CreateH1("CvsE_PADDLE1","PADDLE 1 - Counts versus Energy", 1000, 0., 100.);
-     analysisManager->CreateH1("CvsE_PADDLE2","PADDLE 2 - Counts versus Energy", 1000, 0., 100.);
-     analysisManager->CreateH1("CvsE_PADDLE3","PADDLE 3 - Counts versus Energy", 1000, 0., 100.);
-     
-     analysisManager->CreateH1("CvsE_CLOVER_EA","Entire CLOVER Array - Counts versus Energy", 3000, 0., 3000.);
-     */
     
     
     ////////////////////////////////////////////////////
@@ -240,40 +225,39 @@ void RunAction::EndOfRunAction(const G4Run* /*run*/)
     //
     G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
     
-    /*
-     // print histogram statistics
-     //
-     if( analysisManager->GetH1(1) ){
-     G4cout << "\n ----> print histograms statistic ";
-     if(isMaster) {
-     G4cout << "for the entire run \n" << G4endl;
-     }
-     else {
-     G4cout << "for the local thread \n" << G4endl;
-     }
-     
-     G4cout << " EAbs : mean = "
-     << G4BestUnit(analysisManager->GetH1(1)->mean(), "Energy")
-     << " rms = "
-     << G4BestUnit(analysisManager->GetH1(1)->rms(),  "Energy") << G4endl;
-     
-     G4cout << " EGap : mean = "
-     << G4BestUnit(analysisManager->GetH1(2)->mean(), "Energy")
-     << " rms = "
-     << G4BestUnit(analysisManager->GetH1(2)->rms(),  "Energy") << G4endl;
-     
-     G4cout << " LAbs : mean = "
-     << G4BestUnit(analysisManager->GetH1(3)->mean(), "Length")
-     << " rms = "
-     << G4BestUnit(analysisManager->GetH1(3)->rms(),  "Length") << G4endl;
-     
-     G4cout << " LGap : mean = "
-     << G4BestUnit(analysisManager->GetH1(4)->mean(), "Length")
-     << " rms = "
-     << G4BestUnit(analysisManager->GetH1(4)->rms(),  "Length") << G4endl;
-     
-     }
-     */
+    
+    // print histogram statistics
+    //
+    if( analysisManager->GetH1(1) ){
+      G4cout << "\n ----> print histograms statistic ";
+      if(isMaster) {
+	G4cout << "for the entire run \n" << G4endl;
+      }
+      else {
+	G4cout << "for the local thread \n" << G4endl;
+      }
+      
+      G4cout << " EAbs : mean = "
+	     << G4BestUnit(analysisManager->GetH1(1)->mean(), "Energy")
+	     << " rms = "
+	     << G4BestUnit(analysisManager->GetH1(1)->rms(),  "Energy") << G4endl;
+      
+      G4cout << " EGap : mean = "
+	     << G4BestUnit(analysisManager->GetH1(2)->mean(), "Energy")
+	     << " rms = "
+	     << G4BestUnit(analysisManager->GetH1(2)->rms(),  "Energy") << G4endl;
+      
+      G4cout << " LAbs : mean = "
+	     << G4BestUnit(analysisManager->GetH1(3)->mean(), "Length")
+	     << " rms = "
+	     << G4BestUnit(analysisManager->GetH1(3)->rms(),  "Length") << G4endl;
+      
+      G4cout << " LGap : mean = "
+	     << G4BestUnit(analysisManager->GetH1(4)->mean(), "Length")
+	     << " rms = "
+	     << G4BestUnit(analysisManager->GetH1(4)->rms(),  "Length") << G4endl;
+      
+    }
     
     // save histograms & ntuple
     //

@@ -301,8 +301,6 @@ void EventAction::EndOfEventAction(const G4Event* event)
             {
                 if(CLOVER_HPGeCrystal_EDep[i][j][k] >= CLOVER_HPGeCrystal_ThresholdEnergy)
                 {
-                    //G4cout << "Here we are in the Event Action    " << G4endl;
-
                     CLOVER_HPGeCrystal_EDep[i][j][k] = abs(G4RandGauss::shoot(CLOVER_HPGeCrystal_EDep[i][j][k], 1.7));
                     
                     if(Activate_CLOVER_ComptonSupression)

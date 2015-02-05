@@ -30,6 +30,7 @@
 //      Github repository: https://www.github.com/KevinCWLi/AFRODITE
 //
 //      Main Author:    K.C.W. Li
+//      Edits: Steve Peterson & Vijitha Ramanathan
 //
 //      email: likevincw@gmail.com
 //
@@ -37,35 +38,64 @@
 #ifndef PrimaryGeneratorAction_h
 #define PrimaryGeneratorAction_h 1
 
+#include "G4Event.hh"
+#include "G4ParticleGun.hh"
 #include "G4VUserPrimaryGeneratorAction.hh"
-#include "globals.hh"
 #include "G4ThreeVector.hh"
-
-class G4ParticleGun;
-class G4Event;
+#include "G4ParticleDefinition.hh"
+#include "globals.hh"
 
 /// The primary generator action class with particle gum.
 ///
-/// It defines a single particle which hits the calorimeter
-/// perpendicular to the input face. The type of the particle
-/// can be changed via the G4 build-in commands of G4ParticleGun class
-/// (see the macros provided with this example).
+/// It defines a single particle hitting the afrodite target
+/// perpendicular to the its surface. The particle characteristics
+/// can be changed via the macros defined in PrimaryGeneratorAction
+/// or using the G4 build-in commands of G4ParticleGun class.
+
+class PrimaryGeneratorMessenger;
 
 class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
 public:
     PrimaryGeneratorAction();
     virtual ~PrimaryGeneratorAction();
+
+    // Sets the default event characteristics
+    void          SetDefaultKinematics();
+
+    // Generates the primary event via the ParticleGun method.
+    void          GeneratePrimaries(G4Event* event);
     
-    virtual void GeneratePrimaries(G4Event* event);
+    // Set methods
+    void           SetRandomFlag(G4bool value);
+
+    // Set the verbosity level.
+    inline void    SetVerbosity(G4int a)      {verbosityLevel = a;};
+
+    // Methods to change the parameters of primary particle generation interactively
+    void           SetStartingParticleType(G4String);
     
-    // set methods
-    void SetRandomFlag(G4bool value);
-    
+
 private:
-    G4ParticleGun*  fParticleGun; // G4 particle gun
+    // G4 particle gun
+    G4ParticleGun*               fParticleGun; 
+    // Initialize messenger to accept macros commands    
+    PrimaryGeneratorMessenger*   gunMessenger;
     
+    // Verbosity
+    G4int                        verbosityLevel;
     
+    // parameters of primary particle generation
+    G4String                     particle_type;
+    G4ParticleDefinition*        particle_definition;
+    G4double                     mean_particle_energy;
+    G4double                     particle_energy;
+    G4ThreeVector                starting_particle_position;
+    G4ThreeVector                particle_position;
+    G4ThreeVector                starting_particle_momentum_direction;
+    G4ThreeVector                particle_momentum_direction;
+
+
     G4double    mx;
     G4double    my;
     G4double    mz;
@@ -83,8 +113,7 @@ private:
     
     G4ThreeVector ejectileDirection;
     G4ThreeVector recoilDirection;
-    
-    
+
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
