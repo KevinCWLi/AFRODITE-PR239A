@@ -112,7 +112,7 @@ DetectorConstruction::DetectorConstruction()
 : G4VUserDetectorConstruction(),
 fAbsorberPV(0), fGapPV(0), fCheckOverlaps(false), PhysiCLOVER_HPGeCrystal(0), PhysiCLOVER_Shield_BGOCrystal(0), PhysiCLOVER_Shield_PMT(0), PhysiPlasticScint(0), PhysiHAGAR_NaICrystal(0), PhysiHAGAR_Annulus(0), PhysiHAGAR_FrontDisc(0), PhysiAFRODITE_Dipole1(0), PhysiAFRODITE_Quadrupole(0)
 {
-    WorldSize = 15.*m;
+    WorldSize = 2.0*m;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -234,8 +234,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     /////////////////////////////////////////
     ////        PlasticScint SETUP
     
-    PlasticScint_AllPresent_Override = true;
-    PlasticScint_AllAbsent_Override = false;
+    PlasticScint_AllPresent_Override = false;
+    PlasticScint_AllAbsent_Override = true;
     
     
     //  PlasticScint 1
