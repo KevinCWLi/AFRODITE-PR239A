@@ -1,11 +1,18 @@
 # Macro file for the visualization setting for the initialization phase 
-# of the B4 example when running in interactive mode
+# of AFRODITE - PR239A when running in interactive mode
 #
-
+# PARTICLE SETTINGS
+#
+# Default kinematics: 6 MeV isotropic gamma source at origin (0.0,0.0,0.0)
+#
+/afrodite/gun/particle  gamma  # options: protons, He3, neutron, mu-, gamma, e-, alpha, geantino
+#
+# VIS SETTINGS
+#
 # Use these open statements to open selected visualization
 #
 # Use this open statement to create an OpenGL view:
-#/vis/open OGL 600x600-0+0
+/vis/open OGL 600x600-0+0
 #
 # Use this open statement to create an OpenInventor view:
 #/vis/open OIX
