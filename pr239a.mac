@@ -10,9 +10,9 @@
 /tracking/verbose 0
 /afrodite/gun/verbose 1
 #
-# Multi-threading
+# Multi-threading [doesn't work]
 #
-/run/numberOfWorkers 4
+#/run/numberOfWorkers 4
 #
 # Run Initialization
 #
