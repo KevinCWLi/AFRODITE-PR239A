@@ -12,15 +12,17 @@
 #
 # Multi-threading
 #
-#/run/numberOfWorkers 4
+/run/numberOfWorkers 4
 #
 # Run Initialization
 #
 /run/initialize
 #
-# Beam Details
+# PARTICLE SETTINGS
 #
-# Default kinematics: 250 MeV protons in direction (1.0,0.0,0.0)
+# Default kinematics: 6 MeV isotropic gamma source at origin (0.0,0.0,0.0)
+#
+/afrodite/gun/particle  gamma  # options: protons, He3, neutron, mu-, gamma, e-, alpha, geantino
 #
 # Execute Particles
 #
