@@ -58,59 +58,17 @@
 PrimaryGeneratorAction::PrimaryGeneratorAction()
   : G4VUserPrimaryGeneratorAction()
 {
-    ///////////////////////////////////////////////////////////////
-    //          To generate radioactive decay - enabled particles
-    ///////////////////////////////////////////////////////////////
-    
-    G4int n_particle = 1;
-    fParticleGun  = new G4ParticleGun(n_particle);
-    
-    
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("He3");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("neutron");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("mu-");
-    G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("gamma");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("e-");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("alpha");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("proton");
-    //G4ParticleDefinition* particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("geantino");
-    
-    fParticleGun->SetParticleDefinition(particleDefinition);
-    
-    //fParticleGun->SetParticleEnergy(1.*MeV);
-    //fParticleGun->SetParticleEnergy(1.332*MeV);
-    fParticleGun->SetParticleEnergy(4.0*MeV);
-    
-    //fParticleGun->SetParticleEnergy(200.*MeV);
-    //fParticleGun->SetParticleEnergy(22.5*MeV);
-    //fParticleGun->SetParticleEnergy(50.0*MeV);
-    //fParticleGun->SetParticleEnergy(4*GeV);
-    //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,-1.));
-    
-    
-    //fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.*m,1.90*m));
-    //fParticleGun->SetParticlePosition(G4ThreeVector(0.,57.5*mm,1.6*m));
-    //fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.));
-    //fParticleGun->SetParticlePosition(G4ThreeVector(0.,57.5*mm,2.10*m));
-    
-    fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.));
-    //fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,-3.*mm));
-    //fParticleGun->SetParticlePosition(G4ThreeVector(2000.*mm,0.,3000.0*mm));
-    
-    //fParticleGun->SetParticlePosition(G4ThreeVector(-3.*m, 0., -3.8*m));
-    
-  /*
   // Set default particle attributes
   G4int n_particle = 1;
   fParticleGun = new G4ParticleGun(n_particle);
-  //SetDefaultKinematics();
+  SetDefaultKinematics();
 
   // Create a messenger for this class
   gunMessenger = new PrimaryGeneratorMessenger(this);
 
   // Set verbosityLevel
   verbosityLevel = 0;
-  */
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -118,55 +76,32 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
 PrimaryGeneratorAction::~PrimaryGeneratorAction()
 {
   delete fParticleGun;
-  //delete gunMessenger;
+  delete gunMessenger;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-/*
+
 void PrimaryGeneratorAction::SetDefaultKinematics()
 {
 
   // Define primary particles: protons, He3, neutron, mu-, gamma, e-, alpha, geantino
-  particle_type = "proton";
-  //particle_type = "gamma";
+  particle_type = "gamma";
 
   // Define the parameters for the energy of primary particles
-  G4double default_mean_particle_energy = 250.0*MeV;
+  G4double default_mean_particle_energy = 6.0*MeV;
   mean_particle_energy = default_mean_particle_energy;
 
   // Define the parameters of the initial position (using previous default, for now)
   G4ThreeVector default_particle_position = G4ThreeVector(0.0*mm, 0.0*mm, 0.0*mm);
   starting_particle_position = default_particle_position;
 
-  // Define the parameters of the momentum of primary particles: 
-  //G4ThreeVector default_particle_momentum_direction = G4ThreeVector(1.0, 0.0, 0.0);
-  //starting_particle_momentum_direction = default_particle_momentum_direction;
-
-  //// Isotropy
-  mx = G4RandGauss::shoot(0., 1.);
-  my = G4RandGauss::shoot(0., 1.);
-  mz = G4RandGauss::shoot(0., 1.);
-  G4ThreeVector default_particle_momentum_direction = G4ThreeVector(mx, my, mz);
+  // Define the parameters of the momentum of primary particles
+  G4ThreeVector default_particle_momentum_direction = G4ThreeVector(1.0, 0.0, 0.0);
   starting_particle_momentum_direction = default_particle_momentum_direction;
-*/
-    /*
-     ////////    4He, +1 charge
-     G4int Z = 2, A = 4;
-     
-     G4double ionCharge   = 1.*eplus;
-     G4double excitEnergy = 0.*MeV;
-     
-     G4ParticleDefinition* ion = G4ParticleTable::GetParticleTable()->GetIon(Z,A,excitEnergy);
-     //G4ParticleDefinition* ion = G4IonTable::GetIonTable()->GetIon(Z,A,excitEnergy);
-     //ion->SetPDGLifeTime(1*ns);
-     fParticleGun->SetParticleDefinition(ion);
-     fParticleGun->SetParticleCharge(ionCharge);
-     */
 
-/*
   // Set basic default values
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4String particleName;
+  //G4String particleName;
   G4ParticleDefinition* particle = particleTable->FindParticle(particle_type);
   fParticleGun->SetParticleDefinition(particle);
   fParticleGun->SetParticleEnergy(mean_particle_energy);
@@ -174,22 +109,75 @@ void PrimaryGeneratorAction::SetDefaultKinematics()
   fParticleGun->SetParticleMomentumDirection(starting_particle_momentum_direction);
 
 }
-*/
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-    /*
+    
     // Set the starting primary particles
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
     G4ParticleDefinition* particle = particleTable->FindParticle(particle_type);
     particle_definition = particle;
-    fParticleGun->SetParticleDefinition(particle); 
+    fParticleGun->SetParticleDefinition(particle);
+
+    ///////////////////////////////////////////////////////////////
+    // Particle Energy Characteristics
+    ///////////////////////////////////////////////////////////////
+
+    particle_energy = mean_particle_energy;
+    
+    /*
+     G4double InitialEnergy = G4RandFlat::shoot( 0., 20.);
+     //G4double InitialEnergy = G4RandGamma::shoot( 0.5, 1.);
+    */
+
+
+    ///////////////////////////////////////////////////////////////
+    // Particle Position Characteristics
+    ///////////////////////////////////////////////////////////////
+
+    particle_position = starting_particle_position;
+
+
+    ///////////////////////////////////////////////////////////////
+    // Particle Momentum/Direction Characteristics
+    ///////////////////////////////////////////////////////////////
+
+    // ISOTROPIC
+    //   Exploiting the spherical symmetry of normal distributions
+
+    /*
+     mx = G4RandGauss::shoot( 0, 1.);
+     my = G4RandGauss::shoot( 0, 1.);
+     mz = G4RandGauss::shoot( 0, 1.);
+    */
+
+    // ISOTROPIC
+    //   Alternate method
+    G4double cosTheta = 2 * G4UniformRand() - 1.0;
+    G4double phi      = CLHEP::twopi * G4UniformRand();
+    G4double sinTheta = std::sqrt(1.0 - cosTheta * cosTheta);
+    mx = sinTheta * std::cos(phi);
+    my = sinTheta * std::sin(phi);
+    mz = cosTheta;
+    // Set particle momentum direction
+    particle_momentum_direction = G4ThreeVector(mx, my, mz).unit();
+
+
+    ///////////////////////////////////////////////////////////////
+    // Particle Time Distribution
+    ///////////////////////////////////////////////////////////////
+    
+    /*
+     initialclocktime = G4RandGauss::shoot( 0, 1.5);
+     fParticleGun->SetParticleTime(initialclocktime*ns);
     */
     
+
     ///////////////////////////////////////////////////////////////
-    //          To generate radioactive decay - enabled particles
+    // Radioactive Decay-enabled Particles
     ///////////////////////////////////////////////////////////////
     
     /*
@@ -222,75 +210,11 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
      //ion->SetPDGLifeTime(1*ns);
      fParticleGun->SetParticleDefinition(ion);
      fParticleGun->SetParticleCharge(ionCharge);
-     */
-    
-    
-    ///////////////////////////////////////////////////
-    //              TIME DISTRIBUTION                //
-    ///////////////////////////////////////////////////
-    
-    /*
-     initialclocktime = G4RandGauss::shoot( 0, 1.5);
-     fParticleGun->SetParticleTime(initialclocktime*ns);
-     */
-    
-    
-    
-    
-    ///////////////////////////////////////////////////
-    //       Initial Direction of Particle
-    ///////////////////////////////////////////////////
-    
-    //      Flat Distribution
-    //mx = G4RandFlat::shoot( -.15, .15);
-    //my = G4RandFlat::shoot( -.15, .15);
-    //mz = G4RandFlat::shoot( -1, 1);
-    
-    ////////////////////////////////
-    ////    ISOTROPIC
-    //      Exploiting the spherical symmetry of normal distributions
-    //      Gaussian Distribution
-    
-    
-    mx = G4RandGauss::shoot( 0, 1.);
-    my = G4RandGauss::shoot( 0, 1.);
-    mz = G4RandGauss::shoot( 0, 1.);
-     
-    //if(mz<0) mz = -mz;
-    //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, -mz));
+    */
 
-    //mz = abs(mz);
-    //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,-1.));
-    //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, 10.));
-    
-    fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, mz));
-    
-    
-    ////    Alternative Method for ISOTROPY
-    /*
-    G4double theta = 2*M_PI*G4UniformRand();
-    //G4double mz = -1.0 + 2*G4UniformRand();
-    G4double mz = -1.0 + G4UniformRand();
-    
-    G4double a = sqrt(1-(mz*mz));
-    
-    mx = a*cos(theta);
-    my = a*sin(theta);
-    
-*/
-    //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(mx, my, mz));
-    
-    
-    /*
-     theta = M_PI*G4UniformRand();
-     phi = 2*M_PI*G4UniformRand();
-     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(sin(theta*rad)*cos(phi*rad), sin(theta*rad)*sin(phi*rad), cos(theta*rad)));
-     */
-    
-    
-    
+
     ///////////////////////////////////////////////////
-    //                  16O(a,a')
+    // 16O(a,a')
     ///////////////////////////////////////////////////
     /*
      G4double test = G4UniformRand();
@@ -354,11 +278,9 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
      mz = G4RandFlat::shoot( -1., 1.);
      
      fParticleGun->SetParticleEnergy( (recoilExcitationEnergy - alphaSeperationEnergy - daughterExcitationEnergy)*(3/4)*MeV);
-     
      fParticleGun->SetParticleMomentumDirection(ejectileDirection);
-     
      fParticleGun->GeneratePrimaryVertex(anEvent);
-     */
+    */
     
     
     ////    Recoil - 12C
@@ -367,7 +289,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
      
      recoilDirection = -ejectileDirection;
      fParticleGun->SetParticleMomentumDirection(recoilDirection);
-     */
+    */
     
     /*
      Z = 6, A = 12;
@@ -383,14 +305,11 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
      
      recoilDirection = -ejectileDirection;
      fParticleGun->SetParticleMomentumDirection(recoilDirection);
-     */
-    
+    */
     
     //fParticleGun->GeneratePrimaryVertex(anEvent);
-    
     //G4double Lifetime = fParticleGun->GetParticleDefinition()->GetPDGLifeTime();
     //G4double Lifetime = recoil->GetPDGLifeTime();
-    
     //G4cout << "Here is the alphaSeperationEnergy    "<< alphaSeperationEnergy << G4endl;
     
     
@@ -411,26 +330,11 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
      
      fParticleGun->GeneratePrimaryVertex(anEvent);
      }
-     */
+    */
 
-    
-    ///////////////////////////////////////////////////
-    //       Initial Energy Distribution of Particle
-    ///////////////////////////////////////////////////
-    
-    /*
-     G4double InitialEnergy = G4RandFlat::shoot( 0., 20.);
-     //G4double InitialEnergy = G4RandGamma::shoot( 0.5, 1.);
-     
-     
-     fParticleGun->SetParticleEnergy(InitialEnergy*MeV);
-     */
-    
-    /*
-    particle_energy = mean_particle_energy;
-    particle_position = starting_particle_position;
-    particle_momentum_direction = G4ThreeVector(mx, my, mz);
-
+    ////////////////////////////////////////////////////////
+    //          FINALIZING PARTICLE SETTINGS 
+    ////////////////////////////////////////////////////////
 
     // Set final beam energy
     fParticleGun->SetParticleEnergy(particle_energy);
@@ -461,7 +365,6 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	G4cout << G4endl;
       }
     }
-    */
     
     /*
      G4double Lifetime = fParticleGun->GetParticleDefinition()->GetPDGLifeTime();
@@ -469,55 +372,14 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
      G4double Isospin = fParticleGun->GetParticleDefinition()->GetPDGIsospin();
      G4double Parity = fParticleGun->GetParticleDefinition()->GetPDGiGParity();
      G4String ParticleName = fParticleGun->GetParticleDefinition()->GetParticleName();
-     
-     
-     
+
      G4cout << "Here is the Lifetime    "<< Lifetime << G4endl;
      G4cout << "Here is the Spin    "<< Spin << G4endl;
      G4cout << "Here is the Isospin    "<< Isospin << G4endl;
      G4cout << "Here is the Parity    "<< Parity << G4endl;
      G4cout << "Here is the ParticleName    "<< ParticleName << G4endl;
-     */
-    
-    
-    
-    
-    //create vertex
-    //
-    fParticleGun->GeneratePrimaryVertex(anEvent);
-    
-    
-    
-    /*
-     // This function is called at the begining of event
-     
-     // In order to avoid dependence of PrimaryGeneratorAction
-     // on DetectorConstruction class we get world volume
-     // from G4LogicalVolumeStore
-     //
-     G4double worldZHalfLength = 0;
-     G4LogicalVolume* worlLV
-     = G4LogicalVolumeStore::GetInstance()->GetVolume("World");
-     G4Box* worldBox = 0;
-     if ( worlLV) worldBox = dynamic_cast< G4Box*>(worlLV->GetSolid());
-     if ( worldBox ) {
-     worldZHalfLength = worldBox->GetZHalfLength();
-     }
-     else  {
-     G4ExceptionDescription msg;
-     msg << "World volume of box not found." << G4endl;
-     msg << "Perhaps you have changed geometry." << G4endl;
-     msg << "The gun will be place in the center.";
-     G4Exception("PrimaryGeneratorAction::GeneratePrimaries()",
-     "MyCode0002", JustWarning, msg);
-     }
-     
-     // Set gun position
-     fParticleGun
-     ->SetParticlePosition(G4ThreeVector(0., 0., -worldZHalfLength));
-     
-     fParticleGun->GeneratePrimaryVertex(anEvent);
-     */
+    */
+
 }
 
 // ********************************************************************
