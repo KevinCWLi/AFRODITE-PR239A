@@ -64,7 +64,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
   SetDefaultKinematics();
 
   // Create a messenger for this class
-  gunMessenger = new PrimaryGeneratorMessenger(this);
+  //gunMessenger = new PrimaryGeneratorMessenger(this);
 
   // Set verbosityLevel
   verbosityLevel = 0;
@@ -76,7 +76,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
 PrimaryGeneratorAction::~PrimaryGeneratorAction()
 {
   delete fParticleGun;
-  delete gunMessenger;
+  //delete gunMessenger;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
